@@ -62,8 +62,9 @@ if [[ "${CROSS_COMPILE_TARGET}" =~ "darwin" ]]; then
     NSS_DIST_DIR="${MOZ_FETCHES_DIR}/dist"
   else
     # From https://firefox-ci-tc.services.mozilla.com/tasks/index/app-services.cache.level-3.content.v1.nss-artifact/latest
-    curl -sfSL --retry 5 --retry-delay 10 -O "https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/app-services.cache.level-3.content.v1.nss-artifact.latest/artifacts/public%2Fdist.tar.bz2"
-    SHA256="7a1c49eb2fd6a1b36989d8b52e0dbeb2c89e6575e6281d0496912edd24231a41"
+    #curl -sfSL --retry 5 --retry-delay 10 -O "https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/app-services.cache.level-3.content.v1.nss-artifact.latest/artifacts/public%2Fdist.tar.bz2"
+    curl -sfSL --retry 5 --retry-delay 10 -O "https://firefox-ci-tc.services.mozilla.com/api/queue/v1/task/SoPDAYlATUGeCe4OsUygPg/runs/0/artifacts/public/dist.tar.bz2"
+    SHA256="11d44cea3d2b0e85d12e2f20b0b9335a6b907d4cf2b2322379eefd43dcf43978"
     echo "${SHA256}  dist.tar.bz2" | shasum -a 256 -c - || exit 2
     tar xvjf dist.tar.bz2 && rm -rf dist.tar.bz2
     NSS_DIST_DIR=$(abspath "dist")
